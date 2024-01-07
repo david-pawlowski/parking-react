@@ -1,7 +1,7 @@
-.App main {
+/* .App main {
   display: flex;
   flex-direction: column;
-}
+} */
 
 .parking-spot {
   border: 1px solid #999;
@@ -17,6 +17,8 @@
   text-align: center;
   width: 68px;
   transition: transform 0.2s; 
+  display: inline-block;
+  border: 1px solid #ccc;
 }
 
 .free {
@@ -85,4 +87,3 @@
   display: block;
   color: red;
 }
-

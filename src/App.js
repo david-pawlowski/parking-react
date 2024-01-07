@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import  ParkingSpote from "./ParkingSpot";
+import Modal from "./Modal";
 
 export default function App() {
   return (
@@ -9,7 +9,6 @@ export default function App() {
         <h1>Parking Reservation App</h1>
       </header>
       <main>
-        <ParkingSpote />
         <ParkingList />
       </main>
     </div>
@@ -32,11 +31,9 @@ function ParkingList() {
   }, []);
   return (
     <div className="parking-list">
-      {parkings.map(
-        (parking) => (
-          (<Parking key={parking.name} parking={parking} />)
-        )
-      )}
+      {parkings.map((parking) => (
+        <Parking key={parking.name} parking={parking} />
+      ))}
     </div>
   );
 }
@@ -65,7 +62,7 @@ function ParkingSpotList() {
       });
   }, []);
   return (
-    <div className="parking-spot-list">
+    <div className="parking-spot-list" style={{ display: "flex" }}>
       {spots.map((spot) => (
         <ParkingSpot key={spot.number} number={spot.number} />
       ))}
@@ -75,12 +72,34 @@ function ParkingSpotList() {
 
 function ParkingSpot({ number }) {
   const [isSpotTaken, setIsSpotTaken] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  function handleSpotReservation() {
+    setIsSpotTaken(!isSpotTaken);
+    // fetch("http://localhost:8000/spots/", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({ number: number, isTaken: true }),
+    // });
+  }
   return (
+    <div>
       <button
         className={`parking-spot ${isSpotTaken ? "taken" : "free"}`}
-        onClick={() => setIsSpotTaken(!isSpotTaken)}
+        onClick={() => {
+          setIsModalOpen(true);
+        }}
       >
         {number}
-      </div>
+      </button>
+      {isModalOpen && (
+        <Modal
+          setIsOpen={setIsModalOpen}
+          onSpotReservation={handleSpotReservation}
+        />
+      )}
+    </div>
   );
 }
