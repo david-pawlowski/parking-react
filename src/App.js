@@ -1,45 +1,21 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
+import  ParkingSpote from "./ParkingSpot";
 
 export default function App() {
-  // const [spots, setSpots] = React.useState([]);
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Parking Lot</h1>
+        <h1>Parking Reservation App</h1>
       </header>
       <main>
+        <ParkingSpote />
         <ParkingList />
-        <ParkingSpotList />
-        {/* <AddParkingSpotForm spots={spots} onSetSpots={setSpots} /> */}
       </main>
     </div>
   );
 }
 
-// function AddParkingSpotForm({ spots, onSetSpots }) {
-//   const [spotName, setSpotName] = useState("");
-
-//   function handleSubmit(event) {
-//     event.preventDefault();
-//     if (spotName === "") return;
-
-//     onSetSpots((spots) => [...spots, spotName]);
-//     setSpotName("");
-//   }
-
-//   return (
-//     <form className="form" onSubmit={handleSubmit}>
-//       <input
-//         type="text"
-//         placeholder="Spot Number"
-//         value={spotName}
-//         onChange={(e) => setSpotName(e.target.value)}
-//       />
-//       <button>Add</button>
-//     </form>
-//   );
-// }
 function ParkingList() {
   const [parkings, setParkings] = useState([]);
   useEffect(() => {
@@ -56,17 +32,20 @@ function ParkingList() {
   }, []);
   return (
     <div className="parking-list">
-      {parkings.map((parking) => (
-        <Parking key={parking.id} name={parking.name} />
-      ))}
+      {parkings.map(
+        (parking) => (
+          (<Parking key={parking.name} parking={parking} />)
+        )
+      )}
     </div>
   );
 }
 
-function Parking({ name }) {
+function Parking({ parking }) {
   return (
     <div className="parking">
-      <h3>{name}</h3>
+      <h3 className="parking-name">{parking.name}</h3>
+      <ParkingSpotList />
     </div>
   );
 }
@@ -86,7 +65,7 @@ function ParkingSpotList() {
       });
   }, []);
   return (
-    <div className="parking">
+    <div className="parking-spot-list">
       {spots.map((spot) => (
         <ParkingSpot key={spot.number} number={spot.number} />
       ))}
@@ -97,11 +76,11 @@ function ParkingSpotList() {
 function ParkingSpot({ number }) {
   const [isSpotTaken, setIsSpotTaken] = useState(false);
   return (
-    <button
-      className={`parking-spot ${isSpotTaken ? "taken" : "free"}`}
-      onClick={() => setIsSpotTaken(!isSpotTaken)}
-    >
-      {number}
-    </button>
+      <button
+        className={`parking-spot ${isSpotTaken ? "taken" : "free"}`}
+        onClick={() => setIsSpotTaken(!isSpotTaken)}
+      >
+        {number}
+      </button>
   );
 }
