@@ -2,39 +2,52 @@
   display: flex;
   flex-direction: column;
 }
-.square {
-    background: #12de49;
-    border: 1px solid #999;
-    float: left;
-    font-size: 24px;
-    font-weight: bold;
-    line-height: 34px;
-    height: 120px;
-    margin-right: -1px;
-    margin-top: -1px;
-    padding: 0;
-    text-align: center;
-    width: 34px;
-    margin-right: 10px;
-  }
 
+/* Common styles for parking spots */
+.parking-spot {
+  border: 1px solid #999;
+  font-size: 24px;
+  font-family: 'Roboto', Arial, sans-serif; /* Modern, readable font */
+  font-weight: 700; /* Bold font for clarity */
+  font-weight: bold;
+  line-height: 34px;
+  height: 120px;
+  margin-right: 10px;
+  margin-top: 10px;
+  padding: 0;
+  text-align: center;
+  width: 68px;
+  transition: transform 0.2s; /* Smooth transition for hover effect */
+}
+
+/* Free spot specific styles */
+.free {
+  background: #90EE90;
+  color: #333333; 
+  cursor: pointer; /* Indicates it's clickable */
+}
+
+.free:hover {
+  transform: scale(1.05); /* Slightly enlarges the free spot on hover */
+}
+
+/* Taken spot specific styles */
 .taken {
-    background: #d81010;
-    border: 1px solid #999;
-    float: left;
-    font-size: 24px;
-    font-weight: bold;
-    line-height: 34px;
-    height: 120px;
-    margin-right: -1px;
-    margin-top: -1px;
-    padding: 0;
-    text-align: center;
-    width: 34px;
-    color: white;
-    margin-right: 10px;
-  }
+  background: #FF7F7F;
+  color: #FFFFFF; 
+}
 
+/* Styles for the form */
 .form {
-    margin-top: 20px;
+  margin-top: 20px;
+}
+
+/* Responsive Design: Adjusting layout for smaller screens */
+@media (max-width: 600px) {
+  .parking-spot {
+    width: 48px; /* Smaller width for smaller screens */
+    height: 100px; /* Adjust height accordingly */
+    font-size: 18px; /* Smaller font size */
+    line-height: 28px; /* Adjust line height */
   }
+}
