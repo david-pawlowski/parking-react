@@ -3,12 +3,11 @@
   flex-direction: column;
 }
 
-/* Common styles for parking spots */
 .parking-spot {
   border: 1px solid #999;
   font-size: 24px;
-  font-family: 'Roboto', Arial, sans-serif; /* Modern, readable font */
-  font-weight: 700; /* Bold font for clarity */
+  font-family: 'Roboto', Arial, sans-serif;
+  font-weight: 700;
   font-weight: bold;
   line-height: 34px;
   height: 120px;
@@ -17,38 +16,34 @@
   padding: 0;
   text-align: center;
   width: 68px;
-  transition: transform 0.2s; /* Smooth transition for hover effect */
+  transition: transform 0.2s; 
 }
 
-/* Free spot specific styles */
 .free {
   background: #90EE90;
   color: #333333; 
-  cursor: pointer; /* Indicates it's clickable */
+  cursor: pointer;
 }
 
 .free:hover {
   transform: scale(1.05);
 }
 
-/* Taken spot specific styles */
 .taken {
   background: #FF7F7F;
   color: #FFFFFF; 
 }
 
-/* Styles for the form */
 .form {
   margin-top: 20px;
 }
 
-/* Responsive Design: Adjusting layout for smaller screens */
 @media (max-width: 600px) {
   .parking-spot {
-    width: 48px; /* Smaller width for smaller screens */
-    height: 100px; /* Adjust height accordingly */
-    font-size: 18px; /* Smaller font size */
-    line-height: 28px; /* Adjust line height */
+    width: 48px;
+    height: 100px;
+    font-size: 18px;
+    line-height: 28px;
   }
 }
 
@@ -91,5 +86,3 @@
   color: red;
 }
 
-.parking {
-}

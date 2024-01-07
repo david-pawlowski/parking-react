@@ -81,6 +81,6 @@ function ParkingSpot({ number }) {
         onClick={() => setIsSpotTaken(!isSpotTaken)}
       >
         {number}
-      </button>
+      </div>
   );
 }
