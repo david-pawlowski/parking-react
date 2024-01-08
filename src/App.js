@@ -18,16 +18,20 @@ export default function App() {
 function ParkingList() {
   const [parkings, setParkings] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:8000/parkings/", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setParkings(data.results);
-      });
+    try {
+      fetch("http://localhost:8000/parkings/", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setParkings(data.results);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
   return (
     <div className="parking-list">
@@ -50,17 +54,21 @@ function Parking({ parking }) {
 function ParkingSpotList({ parking }) {
   const [spots, setSpots] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:8000/parkings/${parking.id}/spots/`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setSpots(data.results);
-      });
-  }, []);
+    try {
+      fetch(`http://localhost:8000/parkings/${parking.id}/spots/`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setSpots(data.results);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }, [parking.id]);
   return (
     <div className="parking-spot-list" style={{ display: "flex" }}>
       {spots.map((spot) => (
@@ -76,14 +84,17 @@ function ParkingSpot({ spot }) {
 
   function handleSpotReservation() {
     setIsSpotTaken(!isSpotTaken);
-    console.log(spot);
-    // fetch("http://localhost:8000/spots/", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({ number: number, isTaken: true }),
-    // });
+    try {
+      fetch(`http://localhost:8000/spots/${spot.id}/`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ occupied: true }),
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
