@@ -42,15 +42,15 @@ function Parking({ parking }) {
   return (
     <div className="parking">
       <h3 className="parking-name">{parking.name}</h3>
-      <ParkingSpotList />
+      <ParkingSpotList parking={parking} />
     </div>
   );
 }
 
-function ParkingSpotList() {
+function ParkingSpotList({ parking }) {
   const [spots, setSpots] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:8000/spots/", {
+    fetch(`http://localhost:8000/parkings/${parking.id}/spots/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -64,18 +64,19 @@ function ParkingSpotList() {
   return (
     <div className="parking-spot-list" style={{ display: "flex" }}>
       {spots.map((spot) => (
-        <ParkingSpot key={spot.number} number={spot.number} />
+        <ParkingSpot key={spot.id} spot={spot} />
       ))}
     </div>
   );
 }
 
-function ParkingSpot({ number }) {
-  const [isSpotTaken, setIsSpotTaken] = useState(false);
+function ParkingSpot({ spot }) {
+  const [isSpotTaken, setIsSpotTaken] = useState(spot.occupied);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   function handleSpotReservation() {
     setIsSpotTaken(!isSpotTaken);
+    console.log(spot);
     // fetch("http://localhost:8000/spots/", {
     //   method: "POST",
     //   headers: {
@@ -84,6 +85,7 @@ function ParkingSpot({ number }) {
     //   body: JSON.stringify({ number: number, isTaken: true }),
     // });
   }
+
   return (
     <div>
       <button
@@ -92,7 +94,7 @@ function ParkingSpot({ number }) {
           setIsModalOpen(true);
         }}
       >
-        {number}
+        {spot.number}
       </button>
       {isModalOpen && (
         <Modal
