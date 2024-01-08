@@ -1,40 +1,89 @@
-.App main {
+/* .App main {
   display: flex;
   flex-direction: column;
+} */
+
+.parking-spot {
+  border: 1px solid #999;
+  font-size: 24px;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-weight: 700;
+  font-weight: bold;
+  line-height: 34px;
+  height: 120px;
+  margin-right: 10px;
+  margin-top: 10px;
+  padding: 0;
+  text-align: center;
+  width: 68px;
+  transition: transform 0.2s; 
+  display: inline-block;
+  border: 1px solid #ccc;
 }
-.square {
-    background: #12de49;
-    border: 1px solid #999;
-    float: left;
-    font-size: 24px;
-    font-weight: bold;
-    line-height: 34px;
-    height: 120px;
-    margin-right: -1px;
-    margin-top: -1px;
-    padding: 0;
-    text-align: center;
-    width: 34px;
-    margin-right: 10px;
-  }
+
+.free {
+  background: #90EE90;
+  color: #333333; 
+  cursor: pointer;
+}
+
+.free:hover {
+  transform: scale(1.05);
+}
 
 .taken {
-    background: #d81010;
-    border: 1px solid #999;
-    float: left;
-    font-size: 24px;
-    font-weight: bold;
-    line-height: 34px;
-    height: 120px;
-    margin-right: -1px;
-    margin-top: -1px;
-    padding: 0;
-    text-align: center;
-    width: 34px;
-    color: white;
-    margin-right: 10px;
-  }
+  background: #FF7F7F;
+  color: #FFFFFF; 
+}
 
 .form {
-    margin-top: 20px;
+  margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+  .parking-spot {
+    width: 48px;
+    height: 100px;
+    font-size: 18px;
+    line-height: 28px;
   }
+}
+
+.parking-name {
+  color: inherit;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.parking-name {
+  background:
+    linear-gradient(
+      to right,
+      rgba(100, 200, 200, 1),
+      rgba(100, 200, 200, 1)
+    ),
+    linear-gradient(
+      to right,
+      rgba(255, 0, 0, 1),
+      rgba(255, 0, 180, 1),
+      rgba(0, 100, 200, 1)
+  );
+  background-size: 100% 3px, 0 3px;
+  background-position: 100% 100%, 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 400ms;
+}
+
+.parking-name:hover {
+  background-size: 0 3px, 100% 3px;
+}
+
+
+.hide {
+  display: none;
+}
+
+.parking-spot:hover + .hide {
+  display: block;
+  color: red;
+}
