@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import Modal from "./Modal";
+import { API_URL } from "./utils";
 
 export default function App() {
   return (
@@ -19,10 +20,10 @@ function ParkingList() {
   const [parkings, setParkings] = useState([]);
   useEffect(() => {
     try {
-      fetch("https://parking-spots.azurewebsites.net/parkings/", {
+      fetch(`${API_URL}/parkings/`, {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
+          "Accept": "application/json",
         },
       })
         .then((res) => res.json())
@@ -55,15 +56,12 @@ function ParkingSpotList({ parking }) {
   const [spots, setSpots] = useState([]);
   useEffect(() => {
     try {
-      fetch(
-        `https://parking-spots.azurewebsites.net/parkings/${parking.id}/spots/`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
+      fetch(`${API_URL}/parkings/${parking.id}/spots/`, {
+        method: "GET",
+        headers: {
+          "Accept": "application/json",
+        },
+      })
         .then((res) => res.json())
         .then((data) => {
           setSpots(data.results);
@@ -88,7 +86,7 @@ function ParkingSpot({ spot }) {
   function handleSpotReservation() {
     setIsSpotTaken(!isSpotTaken);
     try {
-      fetch(`https://parking-spots.azurewebsites.net/spots/${spot.id}/`, {
+      fetch(`${API_URL}/spots/${spot.id}/`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
