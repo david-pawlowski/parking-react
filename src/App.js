@@ -19,7 +19,7 @@ function ParkingList() {
   const [parkings, setParkings] = useState([]);
   useEffect(() => {
     try {
-      fetch("http://localhost:8000/parkings/", {
+      fetch("https://parking-spots.azurewebsites.net/parkings/", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -55,12 +55,15 @@ function ParkingSpotList({ parking }) {
   const [spots, setSpots] = useState([]);
   useEffect(() => {
     try {
-      fetch(`http://localhost:8000/parkings/${parking.id}/spots/`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      fetch(
+        `https://parking-spots.azurewebsites.net/parkings/${parking.id}/spots/`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           setSpots(data.results);
@@ -85,7 +88,7 @@ function ParkingSpot({ spot }) {
   function handleSpotReservation() {
     setIsSpotTaken(!isSpotTaken);
     try {
-      fetch(`http://localhost:8000/spots/${spot.id}/`, {
+      fetch(`https://parking-spots.azurewebsites.net/spots/${spot.id}/`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
