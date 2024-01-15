@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import Modal from "./Modal";
 import { API_URL } from "./utils";
+import ResponsiveAppBar from "./ResponsiveAppBar";
 
 export default function App() {
   return (
     <div className="App">
+      <ResponsiveAppBar />
       <header className="App-header">
         <h1>Parking Reservation App</h1>
       </header>
